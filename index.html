@@ -675,8 +675,144 @@ footer{background:var(--surface-base);padding:var(--section-space) var(--page-gu
   .stone-card:hover,.order-btn:hover:not(:disabled),.next-btn:hover,.submit-btn:hover{transform:none}
 }
 </style>
+<style id="atelier-layer">
+/* ═══ NEW: ATELIER LAYER (additive; original CSS untouched) ═══ */
+:root{--ink:#0B0A0F;--ink2:#14121A;--ink3:#1C1923;--champ:#C9A96E;--champ-hi:#E6D3A3;--txt:#EDE8E0;--txt2:#A39E96;--amethyst:#3A2A5C;--midnight:#12183A;--garnet:#5A1E2B}
+body{background:var(--ink);color:var(--txt)}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
+/* living background, grain, dust */
+.aura,#dust,.grain{position:fixed;inset:0;pointer-events:none}
+.aura{z-index:-2}.aura i{position:absolute;inset:0;opacity:0}
+.aura i:nth-child(1){background:radial-gradient(70% 55% at 20% 15%,var(--amethyst),transparent 70%),var(--ink)}
+.aura i:nth-child(2){background:radial-gradient(70% 55% at 80% 35%,var(--midnight),transparent 70%),var(--ink)}
+.aura i:nth-child(3){background:radial-gradient(70% 55% at 25% 70%,var(--garnet),transparent 70%),var(--ink)}
+.aura i:nth-child(4){background:radial-gradient(60% 50% at 60% 90%,rgba(201,169,110,.17),transparent 70%),var(--ink)}
+#dust{z-index:-1}
+.grain{z-index:90;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+/* CHANGED: sections become transparent so the aura flows through; edges cross-fade */
+#story,#philosophy,#ritual,#collection,#delivery,#trust,#policy,.quote-strip,footer{background:transparent}
+#philosophy .section-title{color:var(--txt)!important}/* was dark-on-dark via inline style */
+#hero{-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
+#mountains{-webkit-mask-image:linear-gradient(transparent,#000 20%,#000 80%,transparent);mask-image:linear-gradient(transparent,#000 20%,#000 80%,transparent)}
+.hw{position:absolute;left:50%;top:50%;width:min(92vmin,760px);margin:calc(min(92vmin,760px)/-2) 0 0 calc(min(92vmin,760px)/-2);z-index:1;pointer-events:none;stroke:rgba(201,169,110,.35);fill:rgba(201,169,110,.5);stroke-width:.3}
+.hw text{stroke:none;font-size:7px;text-anchor:middle}
+/* type + shared */
+.chap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(5rem,12vw,9rem) clamp(1.1rem,5vw,4.5rem)}
+.clabel{font:400 .72rem/1 Jost,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--champ);margin-bottom:1.4rem}
+.clabel em{font-style:normal;color:var(--txt2)}
+.chap h2,.q h2{font:300 clamp(2rem,6vw,4.4rem)/1.08 "Cormorant Garamond",serif;letter-spacing:.02em;color:var(--txt);max-width:14em}
+.sub,.hint{font:400 1rem/1.7 Jost,sans-serif;color:var(--txt2);margin-top:1rem}
+.center{text-align:center}.center h2{margin:0 auto}
+.sw{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}.sw>span{display:inline-block}
+.gbtn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.7rem 1.6rem;border:1px solid var(--champ);background:transparent;color:var(--champ);font:500 .74rem Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .3s,color .3s}
+.gbtn:hover{background:var(--champ);color:var(--ink)}.gbtn.sm{min-height:40px;padding:.5rem 1rem;font-size:.66rem}
+.lnk{font:400 .64rem Jost,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--txt2);display:inline-flex;align-items:center;min-height:32px}
+/* II question */
+#seek{position:relative;z-index:1;height:100vh;height:100svh;display:grid;place-items:center;text-align:center}
+.qhead{position:absolute;top:12vh;left:0;right:0;padding:0 1rem}
+.qstack{position:relative;width:min(900px,92vw);height:60vh}
+.q{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem}.q h2{max-width:none}
+.qopts{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
+.qopt{min-height:44px;padding:.6rem 1.2rem;background:transparent;border:1px solid rgba(201,169,110,.45);color:var(--txt);font:400 .8rem Jost,sans-serif;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s}
+.qopt:hover,.qopt[aria-pressed=true]{background:var(--champ);color:var(--ink)}
+.qopt.sg{width:48px;padding:0;font-size:1.25rem}.qopt i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:.6rem}
+.rm #seek{height:auto;padding:6rem 1rem}.rm .qhead{position:static}.rm .qstack{height:auto;display:grid;gap:4rem;margin-top:2rem}.rm .q{position:static}
+/* III tarot */
+#chapters{position:relative}.const{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.cl{fill:none;stroke:rgba(201,169,110,.5);stroke-width:1}.cd{fill:var(--champ-hi);opacity:.7}
+.tcards{display:flex;gap:clamp(.8rem,2vw,1.5rem);justify-content:safe center;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding:3rem 1rem;margin-top:1rem}
+.tcards::-webkit-scrollbar{display:none}
+.tcard{flex:0 0 clamp(158px,15vw,178px);aspect-ratio:5/8;perspective:900px;scroll-snap-align:center}
+.tilt{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+.inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.tcard.flip .inner{transform:rotateY(180deg)}
+.tf{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid rgba(201,169,110,.5);background:var(--ink2);padding:0}
+.tback{cursor:pointer;display:block;width:100%;height:100%}.tback svg{width:100%;height:100%;stroke:var(--champ);fill:none;stroke-width:.7}
+.tfront{transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;text-align:center;padding:.8rem .6rem;gap:.35rem;background:linear-gradient(160deg,var(--ink3),var(--ink2))}
+.tfront .art{width:58%;stroke:var(--champ);fill:none;stroke-width:1}
+.tfront h3{font:400 .95rem "Cormorant Garamond",serif;letter-spacing:.14em;text-transform:uppercase;color:var(--txt)}
+.tl{font:italic 400 .86rem/1.3 "Cormorant Garamond",serif;color:var(--txt2)}.ts{font:400 .6rem Jost,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--champ)}
+.cb{margin-top:auto;display:grid;gap:.3rem;justify-items:center}
+.tturn{position:absolute;top:0;right:0;width:44px;height:44px;background:none;border:0;color:var(--txt2);font-size:1rem;cursor:pointer}
+.glare{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(230,211,163,.22),transparent 55%)}.tcard:hover .glare{opacity:1}
+/* IV atlas + chosen */
+.atlas{display:grid;gap:3rem;align-items:center;margin-top:2.5rem}@media(min-width:900px){.atlas{grid-template-columns:1.1fr 1fr}}
+#wheel{position:relative;width:min(86vw,470px);aspect-ratio:1;margin:auto}
+#wheel .ring{position:absolute;inset:0;width:100%;height:100%;stroke:rgba(201,169,110,.4);fill:none;stroke-width:.3}
+.zsign{position:absolute;width:44px;height:44px;transform:translate(-50%,-50%);border:1px solid rgba(201,169,110,.3);border-radius:50%;background:var(--ink2);color:var(--champ);font-size:1.15rem;cursor:pointer;transition:background .3s,color .3s}
+.zsign:hover,.zsign[aria-pressed=true]{background:var(--champ);color:var(--ink)}
+.ainfo h3{font:300 2.4rem "Cormorant Garamond",serif;color:var(--txt)}.ainfo p{font:400 1rem/1.7 Jost,sans-serif;color:var(--txt2);margin:.4rem 0 1rem}
+.stone-card.atl-dim{opacity:.4}.stone-card.atl-hit{border-color:var(--champ)}
+#chosen{margin-top:4rem}.cr{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.2rem}
+.cp{border:1px solid rgba(255,255,255,.08);background:var(--ink2);padding:1.4rem;display:grid;gap:.4rem}
+.cp h3{font:300 1.6rem "Cormorant Garamond",serif;color:var(--txt)}.cm{font:400 .7rem Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--champ)}.cpr{color:var(--txt);font:400 1rem Jost,sans-serif}
+.cp .cb{margin-top:.6rem;justify-items:start}
+.moon{margin-top:4rem;display:grid;justify-items:center;gap:.6rem;font:400 .62rem Jost,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--txt2)}
+#moon{width:34px;height:34px}#moon circle{fill:none;stroke:var(--champ);stroke-width:.6}#moon path{fill:var(--champ-hi)}
+/* CHANGED: quiet the zodiac ring behind the home-page hero. */
+#hero .hw{opacity:.035}
+/* CHANGED: place the chat launcher beside its panel instead of halfway down the edge. */
+#chatBtn{
+  top:auto;
+  right:1.5rem;
+  bottom:1.5rem;
+  transform:none;
+  width:auto;
+  min-width:68px;
+  height:48px;
+  padding:0 1rem;
+  border:1px solid rgba(201,169,110,.48);
+  border-radius:999px;
+  background:rgba(20,18,26,.92);
+  color:var(--champ-hi);
+  font:500 .68rem Jost,sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  transition:background .25s ease,border-color .25s ease,transform .25s ease;
+}
+#chatBtn:hover{
+  width:auto;
+  background:var(--ink3);
+  border-color:var(--champ);
+  transform:translateY(-2px);
+}
+#chatBox{
+  right:1.5rem;
+  bottom:5.5rem;
+  border-right:1px solid rgba(245,240,232,.18);
+  border-radius:18px;
+}
+@media(max-width:680px){
+  #chatBtn{right:1rem;bottom:1rem}
+  #chatBox{right:1rem;bottom:4.75rem}
+}
+/* cursor, chapter index, intro */
+.has-cursor,.has-cursor *{cursor:none!important}
+#cur,#dot{position:fixed;left:0;top:0;z-index:9999;pointer-events:none}
+#dot{width:6px;height:6px;margin:-3px;border-radius:50%;background:var(--champ-hi)}
+#cur .ring{width:34px;height:34px;margin:-17px;border:1px solid var(--champ);border-radius:50%;transition:transform .35s,background .35s}
+#cur.big .ring{transform:scale(2.1);background:rgba(201,169,110,.12)}
+#cur .lab{position:absolute;left:0;top:0;transform:translate(-50%,-50%);font:500 .56rem Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--champ-hi);opacity:0;transition:opacity .25s;white-space:nowrap}#cur.big .lab{opacity:1}
+#chnav{position:fixed;left:1.2rem;top:50%;transform:translateY(-50%);z-index:150;list-style:none;display:none}
+@media(min-width:1000px){#chnav{display:grid;gap:.9rem}}
+#chnav a{display:block;font:400 .68rem Jost,sans-serif;letter-spacing:.2em;color:var(--txt2);text-decoration:none;opacity:.55;transition:.3s;min-height:24px}
+#chnav a[aria-current]{color:var(--champ);opacity:1;transform:translateX(6px)}
+#intro{position:fixed;inset:0;z-index:450;background:var(--ink);display:grid;place-items:center;text-align:center;clip-path:inset(0);transition:clip-path 1s cubic-bezier(.7,0,.2,1)}
+#intro.out{clip-path:inset(0 0 100% 0)}
+#intro p{font:300 clamp(2rem,8vw,4.5rem) "Cormorant Garamond",serif;letter-spacing:.4em;padding-left:.4em;color:var(--txt);animation:ifade 1.2s both}
+#intro span{display:block;height:1px;margin:1rem auto 0;width:min(50vw,320px);background:var(--champ);transform:scaleX(0);animation:iline 1.2s .2s forwards}
+@keyframes ifade{from{opacity:0}}@keyframes iline{to{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){#dust,#intro{display:none}}
+</style>
 </head>
 <body>
+<!-- NEW: fixed atmosphere layers -->
+<div class="aura" aria-hidden="true"><i></i><i></i><i></i><i></i></div><canvas id="dust" aria-hidden="true"></canvas><div class="grain" aria-hidden="true"></div>
+<ol id="chnav" aria-label="Chapters"></ol>
+
 
 <!-- ═══ CONFIG (edit these) ═══════════════════════════════════════════ -->
 <script>
@@ -780,6 +916,16 @@ const STOCK = {
   </div>
 </section>
 
+<!-- NEW: Chapter II · The Question -->
+<section id="seek" data-roman="II" aria-label="The Question"><p class="clabel qhead">II · The Question <em>— optional. Scroll on to skip.</em></p><div class="qstack"></div></section>
+<!-- NEW: Chapters III + IV -->
+<div id="chapters">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="cback" viewBox="0 0 100 160"><rect x="3" y="3" width="94" height="154" rx="3"/><rect x="8" y="8" width="84" height="144" rx="2"/><circle cx="50" cy="80" r="26"/><circle cx="50" cy="80" r="18"/><path d="M50 50l5 23 23 7-23 7-5 23-5-23-23-7 23-7z"/><path d="M50 14v10M50 136v10M14 80h10M76 80h10"/></symbol></svg>
+<section id="draw" class="chap" data-roman="III"><p class="clabel">III · The Draw</p><h2 data-split>Some pieces find you.</h2><p class="sub">Turn a card. Take the stone it names.</p><div class="tcards" id="deck" role="group" aria-label="Tarot cards"></div></section>
+<section id="atlas" class="chap" data-roman="IV"><p class="clabel">IV · The Atlas</p><h2 data-split>Stones chosen, never stocked.</h2><p class="sub">Select a sign to see its element, its ruler and the stones it keeps.</p>
+<div class="atlas"><div id="wheel" role="group" aria-label="Zodiac signs"></div><div class="ainfo" id="ainfo" aria-live="polite"><h3>Your sign</h3><p>Choose one on the wheel.</p></div></div>
+<div id="chosen"><p class="clabel">Chosen for you</p><div class="cr"></div></div></section>
+</div>
 <!-- COLLECTION -->
 <section id="collection">
   <div class="section-header">
@@ -962,6 +1108,8 @@ const STOCK = {
   </div>
 </section>
 
+<!-- NEW: Chapter VII -->
+<section id="last" class="chap center" data-roman="VII"><p class="clabel">VII · The Last Question</p><h2 data-split>Ready to meet your stone?</h2><p class="sub">Select. Limited. Yours.</p><p style="margin-top:2rem"><a class="gbtn" href="#collection" data-magnetic data-cursor="Enter">Enter the collection</a></p><div class="moon"><svg id="moon" viewBox="0 0 32 32" role="img" aria-label="Moon phase tonight"></svg><span>Tonight’s moon</span></div></section>
 <!-- FOOTER -->
 <footer>
   <svg class="footer-mtn" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
@@ -1474,7 +1622,7 @@ function handleOpt(opt) {
 function openChat() {
   chatOpen = true;
   chatBox.classList.add("open");
-  chatBtn.textContent = "✕";
+  chatBtn.textContent = "Close";
   if (chatMsgs.children.length === 0) {
     setTimeout(() => { addMsg(chatFlow.start.msg, "bot"); setOpts(chatFlow.start.opts); }, 300);
   }
@@ -1681,6 +1829,136 @@ document.getElementById("step3Back").addEventListener("click", () => showStep(2)
     collectionRail.setAttribute("aria-label", "Bracelet collection, scroll to explore");
     collectionRail.tabIndex = 0;
   }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+/* ═══ NEW: ATELIER SCRIPT. Reads (never edits) CONFIG, STOCK and the Mochi cat code. ═══ */
+(()=>{'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,FINE=matchMedia('(hover:hover) and (pointer:fine)').matches,MOBILE=innerWidth<720;
+const G=!!window.gsap&&!!window.ScrollTrigger&&!RM;document.documentElement.classList.toggle('rm',!G);
+/* ── EDITABLE CONFIG: signs [name, glyph, element, ruler, stone]; intents; tarot cards ── */
+const A={
+signs:[['Aries','♈','Fire','Mars','Tiger Eye'],['Taurus','♉','Earth','Venus','Jade'],['Gemini','♊','Air','Mercury','Pyrite'],['Cancer','♋','Water','the Moon','Moonstone'],['Leo','♌','Fire','the Sun','Tiger Eye'],['Virgo','♍','Earth','Mercury','Jade'],['Libra','♎','Air','Venus','Lapis Lazuli'],['Scorpio','♏','Water','Pluto','Amethyst'],['Sagittarius','♐','Fire','Jupiter','Lapis Lazuli'],['Capricorn','♑','Earth','Saturn','Pyrite'],['Aquarius','♒','Air','Uranus','Amethyst'],['Pisces','♓','Water','Neptune','Moonstone']],
+intents:{Love:['Jade','Moonstone'],Protection:['Tiger Eye','Lapis Lazuli'],Clarity:['Lapis Lazuli','Amethyst'],Abundance:['Pyrite','Tiger Eye']},
+colors:{'Tiger Eye':'#C2862B','Lapis Lazuli':'#1E4D8C','Pyrite':'#C4A832','Amethyst':'#7B4FA6','Moonstone':'#D4C5B0','Jade':'#3D8C5A'},
+cards:[
+{n:'The Moon',stone:'Moonstone',line:'Soft light for the long way round.',art:'<path d="M58 19A32 32 0 1 0 58 81A24 24 0 1 1 58 19Z"/><circle cx="76" cy="30" r="1.5"/><circle cx="82" cy="62" r="1"/>'},
+{n:'The Sun',stone:'Tiger Eye',line:'Warmth, unhidden.',art:'<circle cx="50" cy="50" r="14"/><circle cx="50" cy="50" r="26" stroke-dasharray="2 6"/><path d="M50 12v10M50 78v10M12 50h10M78 50h10M23 23l7 7M70 70l7 7M77 23l-7 7M30 70l-7 7"/>'},
+{n:'The Star',stone:'Lapis Lazuli',line:'A small light, steadily kept.',art:'<path d="M50 14l7 27 27 9-27 9-7 27-7-27-27-9 27-9z"/><circle cx="50" cy="50" r="32" stroke-dasharray="1 5"/>'},
+{n:'The Lovers',stone:'Jade',line:'Two things, chosen on purpose.',art:'<circle cx="40" cy="52" r="22"/><circle cx="60" cy="52" r="22"/><path d="M50 22v-8M46 18h8"/>'},
+{n:'Fortune',stone:'Pyrite',line:'The wheel turns. You choose what to carry.',art:'<circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="8"/><path d="M50 20v60M20 50h60M29 29l42 42M71 29L29 71"/>'},
+{n:'Temperance',stone:'Amethyst',line:'Enough, in exact measure.',art:'<path d="M34 26h32l-6 20H40zM34 74h32l-6-20H40z"/><path d="M50 46v8"/>'}]};
+const Q=[{k:'intent',t:'What are you seeking?'},{k:'sign',t:'What does your sun say?'},{k:'stone',t:'Which stone calls to you?'}];
+let S={};try{S=JSON.parse(localStorage.getItem('zk-answers')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('zk-answers',JSON.stringify(S))}catch(e){}};
+const gl=s=>s+'\uFE0E';
+/* order = proxy click on your existing .order-btn, so drop-lock, sold-out and the Mochi bubble behave exactly as before */
+const orderStone=n=>{const b=$('.order-btn[data-stone="'+n+'"]');b&&b.click()};
+let lenis;
+if(G&&window.Lenis){gsap.registerPlugin(ScrollTrigger);lenis=new Lenis({lerp:.085});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+else if(G)gsap.registerPlugin(ScrollTrigger);
+const goTo=t=>lenis?lenis.scrollTo(t,{offset:-30}):($(t)||document.body).scrollIntoView({behavior:RM?'auto':'smooth'});
+document.addEventListener('click',e=>{
+ const a=e.target.closest('a[href^="#"]');if(a&&a.hash.length>1&&$(a.hash)){e.preventDefault();goTo(a.hash)}
+ const o=e.target.closest('[data-order]');if(o)orderStone(o.dataset.order)});
+/* Lenis must pause while your modal is open (your code sets body overflow itself) */
+$('.modal')?.setAttribute('data-lenis-prevent','');$('#chatMsgs')?.setAttribute('data-lenis-prevent','');
+document.addEventListener('modalOpened',()=>lenis&&lenis.stop());
+new MutationObserver(()=>{if(!$('#modalOverlay').classList.contains('open'))lenis&&lenis.start()}).observe($('#modalOverlay'),{attributes:true,attributeFilter:['class']});
+
+/* ── Personalisation ── */
+function picks(){const sc={},add=(s,n)=>s&&(sc[s]=(sc[s]||0)+n);(A.intents[S.intent]||[]).forEach(s=>add(s,2));if(S.sign!=null)add(A.signs[S.sign][4],2);add(S.stone,3);return Object.entries(sc).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0])}
+function chosen(){const l=picks(),el=$('#chosen .cr');el.innerHTML=l.length?l.map(n=>{const c=$('.stone-card[data-stone="'+n+'"]');return '<article class="cp"><h3>'+n+'</h3><p class="cm">'+(c?$('.stone-meaning',c).textContent:'')+'</p><p class="cpr">₹ '+((STOCK[n]||{}).price||'')+'</p><div class="cb"><button class="gbtn sm" data-order="'+n+'">Order</button><a class="lnk" href="#collection">View piece</a></div></article>'}).join(''):'<p class="hint">Answer a question above, or choose a sign. Your pieces will gather here.</p>'}
+function pressed(){$$('.qopt').forEach(b=>{const k=b.dataset.k,v=k==='sign'?+b.dataset.j:b.dataset.v;b.setAttribute('aria-pressed',S[k]===v)})}
+function selectSign(i,persist){
+ $$('.zsign').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.j===i));
+ const s=A.signs[i];if(persist){S.sign=i;save();pressed();chosen()}
+ $('#ainfo').innerHTML='<h3>'+gl(s[1])+' '+s[0]+'</h3><p>'+s[2]+' · ruled by '+s[3]+'<br>Keeps the stone: <b>'+s[4]+'</b></p><button class="gbtn sm" data-order="'+s[4]+'">Order '+s[4]+'</button> <a class="lnk" href="#collection">View in collection</a>';
+ $$('.stone-card').forEach(c=>{const h=c.dataset.stone===s[4];c.classList.toggle('atl-hit',h);c.classList.toggle('atl-dim',!h)})}
+
+/* ── II questions ── */
+const stack=$('#seek .qstack');
+stack.innerHTML=Q.map(q=>'<div class="q"><h2>'+q.t+'</h2><div class="qopts">'+(q.k==='intent'?Object.keys(A.intents).map(v=>'<button class="qopt" data-k="intent" data-v="'+v+'" aria-pressed="false" data-cursor="Choose">'+v+'</button>').join(''):q.k==='sign'?A.signs.map((s,j)=>'<button class="qopt sg" data-k="sign" data-j="'+j+'" aria-label="'+s[0]+'" aria-pressed="false" data-cursor="Choose">'+gl(s[1])+'</button>').join(''):Object.keys(A.colors).map(v=>'<button class="qopt" data-k="stone" data-v="'+v+'" aria-pressed="false" data-cursor="Choose"><i style="background:'+A.colors[v]+'"></i>'+v+'</button>').join(''))+'</div></div>').join('');
+stack.addEventListener('click',e=>{const b=e.target.closest('.qopt');if(!b)return;const k=b.dataset.k;
+ if(k==='sign'){S.sign=+b.dataset.j;selectSign(S.sign,true)}else{S[k]=b.dataset.v;save();pressed();chosen()}});
+
+/* ── III tarot ── */
+const deck=$('#deck');
+deck.innerHTML=A.cards.map((c,i)=>'<div class="tcard"><div class="tilt"><div class="inner"><button class="tf tback" aria-label="Reveal card '+(i+1)+' of '+A.cards.length+'" data-cursor="Draw"><svg viewBox="0 0 100 160" aria-hidden="true"><use href="#cback"/></svg></button><div class="tf tfront" inert><svg class="art" viewBox="0 0 100 100" aria-hidden="true">'+c.art+'</svg><h3>'+c.n+'</h3><p class="tl">'+c.line+'</p><p class="ts">Your stone: '+c.stone+'</p><div class="cb"><button class="gbtn sm" data-order="'+c.stone+'">Order</button><a class="lnk" href="#collection">View piece</a></div><button class="tturn" aria-label="Turn card over">↺</button></div></div><i class="glare"></i></div></div>').join('');
+deck.addEventListener('click',e=>{const t=e.target.closest('.tback,.tturn');if(!t)return;const c=t.closest('.tcard'),on=!c.classList.contains('flip');
+ c.classList.toggle('flip',on);$('.tfront',c).inert=!on;$('.tback',c).inert=on;setTimeout(()=>(on?$('.gbtn',c):$('.tback',c)).focus({preventScroll:true}),50)});
+if(G&&FINE)$$('.tcard').forEach(c=>{const t=$('.tilt',c);
+ c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;gsap.to(t,{rotateY:(x-.5)*14,rotateX:(.5-y)*14,duration:.4,overwrite:true});c.style.setProperty('--gx',x*100+'%');c.style.setProperty('--gy',y*100+'%')});
+ c.addEventListener('pointerleave',()=>gsap.to(t,{rotateX:0,rotateY:0,duration:.6}))});
+
+/* ── IV wheel (buttons stay upright and keyboard-operable; only the ring rotates) ── */
+let ticks='';for(let i=0;i<12;i++)ticks+='<path d="M50 14V28" transform="rotate('+i*30+' 50 50)"/>';
+$('#wheel').innerHTML='<svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="49"/><circle cx="50" cy="50" r="36"/><circle cx="50" cy="50" r="20" stroke-dasharray="1 3"/>'+ticks+'</svg>'+A.signs.map((s,i)=>{const a=(i*30-90)*Math.PI/180;return '<button class="zsign" data-j="'+i+'" aria-label="'+s[0]+'" aria-pressed="false" data-cursor="View" style="left:'+(50+43*Math.cos(a))+'%;top:'+(50+43*Math.sin(a))+'%">'+gl(s[1])+'</button>'}).join('');
+$('#wheel').addEventListener('click',e=>{const b=e.target.closest('.zsign');b&&selectSign(+b.dataset.j,true)});
+if(FINE)$('#wheel').addEventListener('pointerover',e=>{const b=e.target.closest('.zsign');b&&selectSign(+b.dataset.j,false)});
+$$('.order-btn').forEach(b=>b.dataset.cursor='Order');
+if(S.sign!=null)selectSign(S.sign,false);pressed();chosen();
+
+/* ── Moon phase footer detail ── */
+(()=>{const P=29.530588,p=(((Date.now()/864e5)-10957.76)%P+P)%P/P,k=Math.cos(p*2*Math.PI),rx=Math.abs(k)*14,w=p<.5,o=w?1:0,t=w?(k>0?0:1):(k>0?1:0);
+$('#moon').innerHTML='<circle cx="16" cy="16" r="14"/><path d="M16 2A14 14 0 0 '+o+' 16 30A'+rx.toFixed(2)+' 14 0 0 '+t+' 16 2Z"/>'})();
+
+/* ── Chapter index ── */
+const CH=[['I','#hero'],['II','#seek'],['III','#draw'],['IV','#atlas'],['V','#collection'],['VI','#trust'],['VII','#last']];
+$('#chnav').innerHTML=CH.map(c=>'<li><a href="'+c[1]+'" aria-label="Chapter '+c[0]+'">'+c[0]+'</a></li>').join('');
+const mark=i=>$$('#chnav a').forEach((a,j)=>j===i?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current'));mark(0);
+
+if(!G)return;
+/* ═══ MOTION (everything below is skipped for reduced motion / missing libs) ═══ */
+/* aura scrubbed across the whole page: violet → midnight → garnet → gold-dust */
+const L=$$('.aura i');gsap.set(L[0],{opacity:1});
+gsap.timeline({scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:1}}).to(L[0],{opacity:0,duration:1}).to(L[1],{opacity:1,duration:1},0).to(L[1],{opacity:0,duration:1},1).to(L[2],{opacity:1,duration:1},1).to(L[2],{opacity:0,duration:1},2).to(L[3],{opacity:1,duration:1},2);
+/* hero zodiac ring */
+let hw='<svg class="hw" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="82"/>';
+A.signs.forEach((s,i)=>hw+='<text x="100" y="14" transform="rotate('+i*30+' 100 100)">'+gl(s[1])+'</text>');
+$('#hero').insertAdjacentHTML('afterbegin',hw+'</svg>');
+gsap.to('.hw',{rotation:90,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+/* II pinned, scrubbed questions */
+const qs=$$('.q',stack);gsap.set(qs,{autoAlpha:0});
+const qt=gsap.timeline({scrollTrigger:{trigger:'#seek',start:'top top',end:'+=260%',pin:true,scrub:.6}});
+qs.forEach((q,i)=>qt.fromTo(q,{autoAlpha:0,y:40},{autoAlpha:1,y:0,duration:1},i*1.6).to(q,{autoAlpha:0,y:-40,duration:1},i*1.6+1.3));
+/* III fan-out from below the fold; IV ring rotation */
+gsap.from('.tcard',{y:170,opacity:0,rotation:i=>(i-2.5)*7,stagger:.08,ease:'power2.out',scrollTrigger:{trigger:'#draw',start:'top 85%',end:'top 30%',scrub:true}});
+gsap.to('#wheel .ring',{rotation:60,ease:'none',scrollTrigger:{trigger:'#atlas',start:'top bottom',end:'bottom top',scrub:true}});
+/* constellation drawn by scroll (stroke-dashoffset), ending at the Chosen row */
+const cs=$('#chapters'),PTS=[[8,3],[30,12],[18,28],[62,36],[84,28],[70,54],[92,68],[50,94]];let CL=1;
+cs.insertAdjacentHTML('afterbegin','<svg class="const" aria-hidden="true"><path class="cl"/><g class="cd"></g></svg>');
+const cl=$('.cl',cs),cd=$('.cd',cs);
+function constel(){const w=cs.offsetWidth,h=cs.offsetHeight,P=PTS.map(p=>[p[0]*w/100,p[1]*h/100]);$('.const',cs).setAttribute('viewBox','0 0 '+w+' '+h);cl.setAttribute('d',P.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(''));cd.innerHTML=P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.4"/>').join('');CL=cl.getTotalLength();cl.style.strokeDasharray=CL}
+constel();ScrollTrigger.addEventListener('refreshInit',constel);
+gsap.fromTo(cl,{strokeDashoffset:()=>CL},{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:cs,start:'top 70%',end:'bottom 60%',scrub:true,invalidateOnRefresh:true}});
+/* headline reveals: word-by-word rise from a mask (your copy kept verbatim) */
+const split=el=>{const t=el.textContent.trim().split(/\s+/);el.setAttribute('aria-label',t.join(' '));el.innerHTML=t.map(w=>'<span class="sw" aria-hidden="true"><span>'+w+'</span></span>').join(' ');return $$('.sw>span',el)};
+$$('[data-split],.section-title,.mtn-heading,.ritual-title,.delivery-title').forEach(h=>{h.classList.remove('reveal');gsap.from(split(h),{yPercent:115,duration:1.1,ease:'power4.out',stagger:.07,scrollTrigger:{trigger:h,start:'top 88%'}})});
+/* image wipe + slow scale-down on piece art */
+$$('.gem-photo-placeholder').forEach(p=>{const st={trigger:p,start:'top 90%'};gsap.from(p,{clipPath:'inset(0 0 100% 0)',duration:1.2,ease:'power3.inOut',scrollTrigger:st,clearProps:'clipPath'});gsap.from($('.gem-placeholder-bg',p),{scale:1.25,duration:2,ease:'power2.out',scrollTrigger:st,clearProps:'transform'})});
+/* chapter index tracks the scroll */
+CH.forEach((c,i)=>ScrollTrigger.create({trigger:c[1],start:'top 55%',end:'bottom 55%',onToggle:s=>s.isActive&&mark(i)}));
+/* magnetic buttons */
+$$('[data-magnetic]').forEach(b=>{const x=gsap.quickTo(b,'x',{duration:.4}),y=gsap.quickTo(b,'y',{duration:.4});b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();x((e.clientX-r.left-r.width/2)*.25);y((e.clientY-r.top-r.height/2)*.35)});b.addEventListener('pointerleave',()=>{x(0);y(0)})});
+/* star-dust canvas */
+(()=>{const c=$('#dust'),x=c.getContext('2d'),N=MOBILE?22:56;let w,h;const P=[];const sz=()=>{w=c.width=innerWidth;h=c.height=innerHeight};sz();addEventListener('resize',sz);
+for(let i=0;i<N;i++)P.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+.3,v:Math.random()*.12+.03,a:Math.random()*.5+.2});
+(function f(){x.clearRect(0,0,w,h);P.forEach(p=>{p.y-=p.v;p.x+=Math.sin(p.y/90)*.08;if(p.y<-4){p.y=h+4;p.x=Math.random()*w}x.fillStyle='rgba(230,211,163,'+p.a+')';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill()});requestAnimationFrame(f)})()})();
+/* custom cursor (fine pointers only) */
+if(FINE){document.documentElement.classList.add('has-cursor');document.body.insertAdjacentHTML('beforeend','<div id="dot"></div><div id="cur"><div class="ring"></div><span class="lab"></span></div>');
+ const cur=$('#cur'),dot=$('#dot'),lab=$('.lab',cur),qx=gsap.quickTo(cur,'x',{duration:.35,ease:'power3'}),qy=gsap.quickTo(cur,'y',{duration:.35,ease:'power3'});
+ const SEL='a,button,[data-cursor],#pixelCat,input,select,textarea,label';
+ addEventListener('pointermove',e=>{gsap.set(dot,{x:e.clientX,y:e.clientY});qx(e.clientX);qy(e.clientY)},{passive:true});
+ document.addEventListener('pointerover',e=>{const t=e.target.closest(SEL);cur.classList.toggle('big',!!t);lab.textContent=t?(t.closest('[data-cursor]')||{dataset:{}}).dataset.cursor||'':''})}
+/* intro: gold line, brand name, wipe away (sits under the cat, z 450 vs 500) */
+document.body.insertAdjacentHTML('beforeend','<div id="intro"><div><p>Zanskar</p><span></span></div></div>');
+setTimeout(()=>$('#intro').classList.add('out'),1500);setTimeout(()=>$('#intro').remove(),2700);
+addEventListener('load',()=>ScrollTrigger.refresh());
 })();
 </script>
 </body>
